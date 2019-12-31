@@ -1,18 +1,18 @@
 /*
  * BirIslem Java ile yazilmis ve Genetik Algoritma kullanimini ornekleme
- * amaci guden bir ozgur yazilimdir. 
+ * amaci guden bir ozgur yazilimdir.
  * Copyright (C) 2007 T. E. KALAYCI (http://kodveus.blogspot.com)
- *  
+ *
  * BirIslem is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -24,6 +24,7 @@ import birislem.araclar.SayiArac;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * Bu sinifin temel goreve uygulamayi baslatmak ve ilgili grafiksel arayuz
@@ -170,27 +171,32 @@ public class BirIslemApp extends JFrame {
      * metodu cagiran ve hesaplama sonucunu sonuc etiketine yazan metot
      */
     private void hesapla() {
-        // Hesaplama sayilarini okuyalim
-        int sayi1 = Integer.parseInt(txtSayi1.getText());
-        int sayi2 = Integer.parseInt(txtSayi2.getText());
-        int sayi3 = Integer.parseInt(txtSayi3.getText());
-        int sayi4 = Integer.parseInt(txtSayi4.getText());
-        int sayi5 = Integer.parseInt(txtSayi5.getText());
-        int sayi6 = Integer.parseInt(txtSayi6.getText());
-        // Hedef sayiyi okuyalim
-        int hedefSayi = Integer.parseInt(txtHedefSayi.getText());
-        // Bosu bosuna hesaplama yapmamak icin asagidaki kontrolu yapiyoruz
-        if ((sayi1 * sayi2 * sayi3 * sayi4 * sayi5 * sayi6) < hedefSayi) {
-            JOptionPane.showMessageDialog(this,
-                    "Bu sayılarla hedef sayı üretilemez!", "ÜRETİLEMEZ",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            // GenetikHesaplama sinifinda elimizdeki sayilara gore
-            // hesaplama yapip sonucu cozum etiketine yazalim
-            lblCozum.setText(""
-                    + GenetikHesaplama.getInstance().hesapla(
-                    new int[]{sayi1, sayi2, sayi3, sayi4, sayi5,
-                            sayi6}, hedefSayi));
+        try {
+            // Hesaplama sayilarini okuyalim
+            int sayi1 = Integer.parseInt(txtSayi1.getText());
+            int sayi2 = Integer.parseInt(txtSayi2.getText());
+            int sayi3 = Integer.parseInt(txtSayi3.getText());
+            int sayi4 = Integer.parseInt(txtSayi4.getText());
+            int sayi5 = Integer.parseInt(txtSayi5.getText());
+            int sayi6 = Integer.parseInt(txtSayi6.getText());
+            // Hedef sayiyi okuyalim
+            int hedefSayi = Integer.parseInt(txtHedefSayi.getText());
+            // Bosu bosuna hesaplama yapmamak icin asagidaki kontrolu yapiyoruz
+            if ((sayi1 * sayi2 * sayi3 * sayi4 * sayi5 * sayi6) < hedefSayi) {
+                JOptionPane.showMessageDialog(this,
+                        "Bu sayılarla hedef sayı üretilemez!", "ÜRETİLEMEZ",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                // GenetikHesaplama sinifinda elimizdeki sayilara gore
+                // hesaplama yapip sonucu cozum etiketine yazalim
+                lblCozum.setText(""
+                        + GenetikHesaplama.getInstance().hesapla(
+                        new int[]{sayi1, sayi2, sayi3, sayi4, sayi5,
+                                sayi6}, hedefSayi));
+            }
+        }
+        catch (Exception e){
+            showMessageDialog(null, "Hata!!\nTüm sayıların girildiğinden emin olun.");
         }
     }
 
